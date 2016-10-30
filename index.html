@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson 2</title>
+</head>
+<body>
+    <div id="name"></div>
+    <div id="age"></div>
+    <div id="sleep"></div>
+    <div id="eat"></div>
+    <div id="play"></div>
+    <div id="died"></div>
+</body>
+<script>
+    function Tamagotchi(name, age) {
+        this.name = name;
+        this.age = age;
+        var timeDied = (new Date()).getHours() + age;
+        var timeSleep = 21;
+        var eat = 0;
+        var play = 0;
+        var died = false;
+
+        this.getAge = function () {
+            return this.age;
+        };
+        this.getNameTamagotchi = function () {
+            return this.name;
+        };
+        this.getTimeSleep = function () {
+            var date = new Date();
+            if (date.getHours() > timeSleep) {
+                return 'I want sleep';
+            }
+            return 'I want to play';
+        };
+        this.getEat = function () {
+            return eat;
+        };
+        this.setEat = function(numberEat) {
+            eat += numberEat;
+        };
+        this.isHungrey = function () {
+            if (eat < 3) {
+                return true;
+            }
+            return false;
+        };
+        this.getHungrey = function () {
+            return this.isHungrey.call() ? 'I am hungrey' : 'I want to play';
+        };
+        this.getPlay = function () {
+            return this.isPlay.call() ? 'I want to play' : 'I want relax';
+        };
+        this.setPlay = function () {
+            play++;
+        };
+        this.isPlay = function () {
+            if (play < 2) {
+                return true;
+            }
+            return false;
+        };
+        this.isDied = function () {
+            console.log(timeDied);
+            if ((new Date()).getHours() > timeDied) {
+                return true;
+            }
+            return false;
+        };
+        this.getDied = function () {
+            return this.isDied.call() ? 'I died' : 'I not died';
+        };
+    }
+
+    var Test1 = new Tamagotchi('Test', 1);
+    Test1.setEat(1);
+    Test1.setEat(1);
+    Test1.setPlay();
+    var name1 = document.getElementById('name');
+    name1.innerHTML = 'Name: '+Test1.getNameTamagotchi();
+    var age = document.getElementById('age');
+    age.innerHTML = 'Age: '+Test1.getAge();
+    var sleep = document.getElementById('sleep');
+    sleep.innerHTML = 'Is time to sleep? '+Test1.getTimeSleep();
+    var eat = document.getElementById('eat');
+    eat.innerHTML = 'Hungrey: '+Test1.getHungrey();
+    var play = document.getElementById('play');
+    play.innerHTML = 'Play: '+Test1.getPlay();
+    var died = document.getElementById('died');
+    died.innerHTML = 'Died: '+Test1.getDied();
+</script>
+</html>
