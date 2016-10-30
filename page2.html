@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a href="index.html">Back</a>
+    <div id="res"></div>
+</body>
+<script>
+    var divResult = document.getElementById('res');
+    var arrayHeight = [2,1,5,0,3,4,7,2,3,1,0];
+
+//    Array.prototype.next = function() {
+//        if (!((this.current + 1) in this)) return false;
+//        return this[++this.current];
+//    }
+    console.log(arrayHeight);
+    resArr = [];
+    var max = 0;
+
+    arrayHeight.forEach(function (val, ind, arr) {
+//        if (ind !== 0 || ind !== (arr.length - 1)) {
+            if (val < max && arr[ind + 1] > val) {
+                if (max < arr[ind + 1]) {
+                    resArr.push(max - val);
+                    console.log('index  '+ind+' res val '+(max - val));
+                    console.log('max '+max);
+                } else {
+                    resArr.push(arr[ind + 1] - val);
+                    console.log('index1  '+ind+' res val '+(arr[ind + 1] - val));
+                    console.log('max '+max);
+                }
+
+            } else {
+                max = val;
+            }
+//        }
+
+    });
+    console.log(resArr);
+
+//    var newArr = arrayHeight.map(function (value, index, arr) {
+//        if (index === 0 || index === (arr.length - 1)) {
+//            return value;
+//        }
+//        if (value < arr[index - 1]) {
+//            return arr[index - 1] - value;
+//        }
+//        return value;
+//    });
+//    console.log(newArr);
+//    newArr = newArr.filter(function (val, ind, arr) {
+//        if (ind === 0 || ind === (arr.length - 1)) {
+//            return false;
+//        }
+//        return true;
+//    });
+    result = resArr.reduce(function(sum, current) {
+        return sum + current;
+    }, 0);
+    divResult.innerHTML = 'Result ' + result;
+</script>
+</html>

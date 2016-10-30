@@ -5,6 +5,7 @@
     <title>lesson 2</title>
 </head>
 <body>
+    <a href="page2.html">Practice2</a>
     <div id="name"></div>
     <div id="age"></div>
     <div id="sleep"></div>
@@ -16,11 +17,10 @@
     function Tamagotchi(name, age) {
         this.name = name;
         this.age = age;
-        var timeDied = (new Date()).getHours() + age;
         var timeSleep = 21;
         var eat = 0;
         var play = 0;
-        var died = false;
+        var hungrey = false;
 
         this.getAge = function () {
             return this.age;
@@ -43,9 +43,9 @@
         };
         this.isHungrey = function () {
             if (eat < 3) {
-                return true;
+                return hungrey = true;
             }
-            return false;
+            return hungrey = false;
         };
         this.getHungrey = function () {
             return this.isHungrey.call() ? 'I am hungrey' : 'I want to play';
@@ -61,16 +61,6 @@
                 return true;
             }
             return false;
-        };
-        this.isDied = function () {
-            console.log(timeDied);
-            if ((new Date()).getHours() > timeDied) {
-                return true;
-            }
-            return false;
-        };
-        this.getDied = function () {
-            return this.isDied.call() ? 'I died' : 'I not died';
         };
     }
 
@@ -88,7 +78,5 @@
     eat.innerHTML = 'Hungrey: '+Test1.getHungrey();
     var play = document.getElementById('play');
     play.innerHTML = 'Play: '+Test1.getPlay();
-    var died = document.getElementById('died');
-    died.innerHTML = 'Died: '+Test1.getDied();
 </script>
 </html>
