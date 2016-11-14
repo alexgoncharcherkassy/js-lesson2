@@ -5,61 +5,35 @@
     <title>Title</title>
 </head>
 <body>
-    <a href="index.html">Back</a>
-    <div id="res"></div>
+<a href="index.html">Back</a>
+<div id="res"></div>
 </body>
 <script>
     var divResult = document.getElementById('res');
-    var arrayHeight = [2,1,5,0,3,4,7,2,3,1,0];
+    var arrayHeights = [2, 1, 5, 0, 3, 4, 7, 2, 3, 1, 0];
 
-//    Array.prototype.next = function() {
-//        if (!((this.current + 1) in this)) return false;
-//        return this[++this.current];
-//    }
-    console.log(arrayHeight);
-    resArr = [];
-    var max = 0;
+    function maxWater(heights) {
+        var left = 0,
+                right = heights.length - 1,
+                leftMax = heights[left],
+                rightMax = heights[right],
+                volume = 0;
 
-    arrayHeight.forEach(function (val, ind, arr) {
-//        if (ind !== 0 || ind !== (arr.length - 1)) {
-            if (val < max && arr[ind + 1] > val) {
-                if (max < arr[ind + 1]) {
-                    resArr.push(max - val);
-                    console.log('index  '+ind+' res val '+(max - val));
-                    console.log('max '+max);
-                } else {
-                    resArr.push(arr[ind + 1] - val);
-                    console.log('index1  '+ind+' res val '+(arr[ind + 1] - val));
-                    console.log('max '+max);
-                }
-
+        while (left < right) {
+            if (leftMax < rightMax) {
+                var height = heights[++left];
+                leftMax = Math.max(leftMax, height);
+                volume += leftMax - height;
             } else {
-                max = val;
+                var height = heights[--right];
+                rightMax = Math.max(rightMax, height);
+                volume += rightMax - height;
             }
-//        }
+        }
 
-    });
-    console.log(resArr);
+        return volume;
+    }
 
-//    var newArr = arrayHeight.map(function (value, index, arr) {
-//        if (index === 0 || index === (arr.length - 1)) {
-//            return value;
-//        }
-//        if (value < arr[index - 1]) {
-//            return arr[index - 1] - value;
-//        }
-//        return value;
-//    });
-//    console.log(newArr);
-//    newArr = newArr.filter(function (val, ind, arr) {
-//        if (ind === 0 || ind === (arr.length - 1)) {
-//            return false;
-//        }
-//        return true;
-//    });
-    result = resArr.reduce(function(sum, current) {
-        return sum + current;
-    }, 0);
-    divResult.innerHTML = 'Result ' + result;
+    divResult.innerHTML = 'Result ' + maxWater(arrayHeights);
 </script>
 </html>
